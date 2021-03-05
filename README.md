@@ -17,11 +17,16 @@
 - 趣味などで知識を蓄えたい時
 
 ## 設計書
+||URL|
+|----|----|
+|ER図(準備中)|https://drive.google.com/file/d/1EDNDuLDAB8wT_G7WhKN9qyQN976-NcOR/view?usp=sharing|
+|テーブル定義書(準備中)|https://docs.google.com/spreadsheets/d/1odKdrtpm9HPjH6naqYF52C4Z_irwWXGRZM2_XaxmQpk/edit?usp=sharing|
+|アプリケーション詳細設計書(準備中)|https://docs.google.com/spreadsheets/d/1y1YkCn5J9mGcz5sz5GvBgfrlzWChhMOboMcvo1fC1GY/edit?usp=sharing|
 
-### 機能一覧
+## 機能一覧
 https://docs.google.com/spreadsheets/d/1fxzP7s1ffZQQYVCcJI3A7CKCFvgTCVi_0aK4Ut5at44/edit?usp=sharing
 
-### 開発環境
+## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
