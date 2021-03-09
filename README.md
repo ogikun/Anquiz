@@ -21,7 +21,7 @@
 |----|----|
 |ER図|https://drive.google.com/file/d/1EDNDuLDAB8wT_G7WhKN9qyQN976-NcOR/view?usp=sharing|
 |テーブル定義書|https://docs.google.com/spreadsheets/d/1odKdrtpm9HPjH6naqYF52C4Z_irwWXGRZM2_XaxmQpk/edit?usp=sharing|
-|アプリケーション詳細設計書|https://docs.google.com/spreadsheets/d/1y1YkCn5J9mGcz5sz5GvBgfrlzWChhMOboMcvo1fC1GY/edit?usp=sharing|
+|詳細設計書|https://docs.google.com/spreadsheets/d/1y1YkCn5J9mGcz5sz5GvBgfrlzWChhMOboMcvo1fC1GY/edit?usp=sharing|
 
 ## 機能一覧
 https://docs.google.com/spreadsheets/d/1fxzP7s1ffZQQYVCcJI3A7CKCFvgTCVi_0aK4Ut5at44/edit?usp=sharing
