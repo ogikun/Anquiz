@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   scope module: :users do
     get '/mypage', to: 'users#mypage', as: 'mypage'
     get '/edit', to: 'users#edit', as: 'edit_users'
-    patch '/updateinfo', to: 'users#updateInfo', as: 'updateinfo'
+    patch '/edit', to: 'users#updateInfo', as: 'updateinfo'
   end
+  resources :lists, only: [:show, :create, :edit, :update]
+  resources :words, only: [:create, :update]
+  resources :add_words, only: [:create, :destroy]
 end
