@@ -1,5 +1,7 @@
 class Users::UsersController < ApplicationController
   def mypage
+    @lists = List.where(user_id: current_user.id)
+    @createList = List.new
   end
 
   def edit
@@ -11,7 +13,7 @@ class Users::UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to mypage_path
     else
-      render users/users/edit
+      render action: :edit
     end
   end
 
