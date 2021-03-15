@@ -12,7 +12,7 @@
   解説<%= word.description %>
 <% end %>
 
-<%= form_with model: @word, local: true do |f| %>
+<%= form_with model: @createWord, url: words_path, local: true do |f| %>
   <label for="question">問題</label>
   <%= f.text_area :question, id: "question" %>
   <label for="answer">解答</label>

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     get '/edit', to: 'users#edit', as: 'edit_users'
     patch '/edit', to: 'users#updateInfo', as: 'updateinfo'
   end
-  resources :lists, only: [:show, :create, :edit, :update]
   resources :words, only: [:create, :update]
   resources :add_words, only: [:create, :destroy]
+  resources :lists, only: [:show, :create, :edit, :update]
 end
