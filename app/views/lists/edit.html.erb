@@ -1,0 +1,23 @@
+<%= form_with model: @list, local: true do |f| %>
+  <label for="title">リスト名</label>
+  <%= f.text_field :title, id: "title" %>
+  <label for="about">概要</label>
+  <%= f.text_area :about, id: "about" %>
+  <%= f.submit "更新" %>
+<% end %>
+
+<% @words.each do |word| %>
+  問<%= word.question %>
+  答え<%= word.answer %>
+  解説<%= word.description %>
+<% end %>
+
+<%= form_with model: @createWord, url: words_path, local: true do |f| %>
+  <label for="question">問題</label>
+  <%= f.text_area :question, id: "question" %>
+  <label for="answer">解答</label>
+  <%= f.text_field :answer, id: "answer" %>
+  <label for="description">解説</label>
+  <%= f.text_area :description, id: "description" %>
+  <%= f.submit "単語登録" %>
+<% end %>
