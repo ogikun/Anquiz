@@ -6,6 +6,17 @@
   <%= f.submit "更新" %>
 <% end %>
 
+<% @list.taggings.each do |tagging| %>
+  <%= tagging.tag.tag %>
+  <%= link_to "×", list_tag_taggings_path(list_id: params[:id], tag_id: tagging.tag.id), method: :delete %>
+<% end %>
+
+<%= form_with(model: [@list,@createTag], local: true) do |f| %>
+  <label for="tag">タグ</label>
+  <%= f.text_field :tag, id: "tag" %>
+  <%= f.submit "追加" %>
+<% end %>
+
 <% @list.add_words.each do |add_word| %>
   問<%= add_word.word.question %>
   答え<%= add_word.word.answer %>
