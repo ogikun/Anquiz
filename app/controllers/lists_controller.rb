@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
   def show
+    @list = List.find(params[:id])
   end
 
   def create
@@ -17,7 +18,6 @@ class ListsController < ApplicationController
 
   def edit
     @list = List.find(params[:id])
-    @words = Word.all
     @createWord = Word.new
   end
 

@@ -1,0 +1,6 @@
+<% @list.add_words.each do |add_word| %>
+  <%= add_word.word.question %>
+  <%= link_to "☆", list_word_favorites_path(list_id: params[:id],word_id: add_word.word.id), method: :post %>
+  <%= link_to "★", list_word_favorites_path(list_id: params[:id],word_id: add_word.word), method: :delete %>
+  <%= add_word.word.favorites.count %>
+<% end %>
