@@ -20,6 +20,7 @@ class ListsController < ApplicationController
   def edit
     @list = List.find(params[:id])
     @createWord = Word.new
+    @createTag = Tag.new
   end
 
   def update
