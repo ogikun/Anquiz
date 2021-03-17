@@ -5,10 +5,14 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   scope module: :users do
     get '/mypage', to: 'users#mypage', as: 'mypage'
+    get '/bookmark', to: 'users#bookmark', as: 'bookmark'
     get '/edit', to: 'users#edit', as: 'edit_users'
     patch '/edit', to: 'users#updateInfo', as: 'updateinfo'
   end
-  resources :words, only: [:create, :update]
+  resources :lists, only: [:show, :create, :edit, :update] do
+    resources :words, only: [:create, :update] do
+      resource :favorites, only: [:create, :destroy]
+    end
+  end
   resources :add_words, only: [:create, :destroy]
-  resources :lists, only: [:show, :create, :edit, :update]
 end

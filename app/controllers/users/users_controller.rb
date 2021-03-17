@@ -4,6 +4,9 @@ class Users::UsersController < ApplicationController
     @createList = List.new
   end
 
+  def bookmark
+  end
+
   def edit
     @user = current_user
   end

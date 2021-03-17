@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 2021_03_11_172033) do
     t.integer "word_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_add_words_on_list_id"
+    t.index ["word_id"], name: "index_add_words_on_word_id"
   end
 
   create_table "admins", force: :cascade do |t|
@@ -33,9 +35,11 @@ ActiveRecord::Schema.define(version: 2021_03_11_172033) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "list_id", null: false
+    t.integer "word_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+    t.index ["word_id"], name: "index_favorites_on_word_id"
   end
 
   create_table "lists", force: :cascade do |t|
@@ -45,6 +49,7 @@ ActiveRecord::Schema.define(version: 2021_03_11_172033) do
     t.integer "public_status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -69,6 +74,7 @@ ActiveRecord::Schema.define(version: 2021_03_11_172033) do
     t.integer "public_status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_words_on_user_id"
   end
 
 end

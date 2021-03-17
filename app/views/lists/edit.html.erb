@@ -6,13 +6,13 @@
   <%= f.submit "更新" %>
 <% end %>
 
-<% @words.each do |word| %>
-  問<%= word.question %>
-  答え<%= word.answer %>
-  解説<%= word.description %>
+<% @list.add_words.each do |add_word| %>
+  問<%= add_word.word.question %>
+  答え<%= add_word.word.answer %>
+  解説<%= add_word.word.description %>
 <% end %>
 
-<%= form_with model: @createWord, url: words_path, local: true do |f| %>
+<%= form_with(model: [@list,@createWord], local: true) do |f| %>
   <label for="question">問題</label>
   <%= f.text_area :question, id: "question" %>
   <label for="answer">解答</label>
