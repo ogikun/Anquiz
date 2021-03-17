@@ -4,3 +4,15 @@
   <%= link_to "★", list_word_favorites_path(list_id: params[:id],word_id: add_word.word), method: :delete %>
   <%= add_word.word.favorites.count %>
 <% end %>
+
+<% @list.comments.each do |comment| %>
+  <%= comment.user.name %>
+  <%= comment.comment %>
+  <%= link_to "削除", list_comment_path(list_id: params[:id], id: comment.id), method: :delete %>
+<% end %>
+
+<%= form_with(model: [@list, @createComment], local:true) do |f| %>
+  <label for="comment">コメント</label>
+  <%= f.text_area :comment, id: "comment" %>
+  <%= f.submit "投稿" %>
+<% end %>

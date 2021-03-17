@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :words, only: [:create, :update] do
       resource :favorites, only: [:create, :destroy]
     end
+    resources :comments, only: [:create, :destroy]
   end
   resources :add_words, only: [:create, :destroy]
 end

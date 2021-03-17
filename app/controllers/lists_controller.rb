@@ -1,6 +1,7 @@
 class ListsController < ApplicationController
   def show
     @list = List.find(params[:id])
+    @createComment = Comment.new
   end
 
   def create
