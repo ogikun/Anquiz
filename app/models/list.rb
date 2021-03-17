@@ -4,6 +4,7 @@ class List < ApplicationRecord
 
   belongs_to :user
   has_many :words, dependent: :destroy, through: :add_words
-  has_many :add_words
+  has_many :add_words, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
 end
