@@ -10,6 +10,15 @@ Rails.application.routes.draw do
     get '/edit', to: 'users#edit', as: 'edit_users'
     patch '/edit', to: 'users#updateInfo', as: 'updateinfo'
   end
+  namespace :admins do
+    get '/', to: 'admins#admin_page'
+    get '/end_user_index', to: 'admins#end_user_index'
+    get '/end_user/:id', to: 'admins#end_user'
+    get '/list_index', to: 'admins#list_index'
+    get '/list/:id', to: 'admins#list'
+    get '/tag_index', to: 'admins#tag_index'
+    get '/search', to: 'admins#search'
+  end
   resources :lists, only: [:show, :create, :edit, :update] do
     resources :words, only: [:create, :update] do
       resource :favorites, only: [:create, :destroy]
