@@ -1,1 +1,17 @@
-a
+<% if params[:model] == "search_tag" %>
+  <% if @results %>
+    <% @results.each do |result| %>
+      <%= result.title %>
+    <% end %>
+  <% else %>
+    検索結果はありません
+  <% end %>
+<% else %>
+  <% if @results %>
+    <% @results.each do |result| %>
+      <%= result.title %>
+    <% end %>
+  <% else %>
+    検索結果はありません
+  <% end %>
+<% end %>
