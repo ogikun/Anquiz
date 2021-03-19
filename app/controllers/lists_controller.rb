@@ -2,6 +2,7 @@ class ListsController < ApplicationController
   def show
     @list = List.find(params[:id])
     @createComment = Comment.new
+    @tags = @list.tags
   end
 
   def create
@@ -21,6 +22,7 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
     @createWord = Word.new
     @createTag = Tag.new
+    @tags = @list.tags
   end
 
   def update
@@ -37,6 +39,8 @@ class ListsController < ApplicationController
   def if_input_blank(input)
     if input == ""
       input = "未設定"
+    else
+      input = input
     end
   end
 

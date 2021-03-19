@@ -7,6 +7,6 @@ class List < ApplicationRecord
   has_many :add_words, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :taggings, dependent: :destroy
-  has_many :tag, dependent: :destroy, through: :taggings
+  has_many :tags, dependent: :destroy, through: :taggings
 
 end

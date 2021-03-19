@@ -3,12 +3,16 @@
   <%= f.text_field :title, id: "title" %>
   <label for="about">概要</label>
   <%= f.text_area :about, id: "about" %>
+  <%= f.label :public_status, '公開' %>
+  <%= f.radio_button(:public_status, "1") %>
+  <%= f.label :public_status, '非公開' %>
+  <%= f.radio_button(:public_status, "0") %>
   <%= f.submit "更新" %>
 <% end %>
 
-<% @list.taggings.each do |tagging| %>
-  <%= tagging.tag.tag %>
-  <%= link_to "×", list_tag_taggings_path(list_id: params[:id], tag_id: tagging.tag.id), method: :delete %>
+<% @tags.each do |tag| %>
+  <%= tag.tag %>
+  <%= link_to "×", list_tag_taggings_path(list_id: params[:id], tag_id: tag.id), method: :delete %>
 <% end %>
 
 <%= form_with(model: [@list,@createTag], local: true) do |f| %>

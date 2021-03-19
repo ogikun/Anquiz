@@ -23,6 +23,15 @@
       <%= link_to '管理者ログイン', new_admin_session_path %>
     <%end%>
   </header>
+    <%= form_with url: search_path, local: :true, method: :get do |f| %>
+      <%= f.label :keyword, '検索' %>
+      <%= f.search_field :keyword %>
+      <%= f.submit '検索' %><br>
+      <%= f.label :model, 'リスト名' %>
+      <%= f.radio_button(:model, :search_list, checked: true) %>
+      <%= f.label :model, 'タグ' %>
+      <%= f.radio_button(:model, :search_tag) %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
