@@ -14,24 +14,45 @@
     <% if admin_signed_in? %>
       管理者としてログイン
       <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+      <%= form_with url: admins_search_path, local: :true, method: :get do |f| %>
+        <%= f.label :keyword, '検索' %>
+        <%= f.search_field :keyword %>
+        <%= f.submit '検索' %><br>
+        <%= f.label :model, 'リスト' %>
+        <%= f.radio_button(:model, :search_list, checked: true) %>
+        <%= f.label :model, 'ユーザー' %>
+        <%= f.radio_button(:model, :search_user) %>
+        <%= f.label :model, 'タグ' %>
+        <%= f.radio_button(:model, :search_tag) %>
+      <% end %>
     <%elsif user_signed_in? %>
       <%= User.find(current_user.id).name %>としてログイン
       <%= link_to 'マイページ', mypage_path %>
       <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+      <%= form_with url: search_path, local: :true, method: :get do |f| %>
+        <%= f.label :keyword, '検索' %>
+        <%= f.search_field :keyword %>
+        <%= f.submit '検索' %><br>
+        <%= f.label :model, 'リスト名' %>
+        <%= f.radio_button(:model, :search_list, checked: true) %>
+        <%= f.label :model, 'タグ' %>
+        <%= f.radio_button(:model, :search_tag) %>
+      <% end %>
     <%else%>
       <%= link_to 'ユーザーログイン', new_user_session_path %>
       <%= link_to '管理者ログイン', new_admin_session_path %>
+      <%= form_with url: search_path, local: :true, method: :get do |f| %>
+        <%= f.label :keyword, '検索' %>
+        <%= f.search_field :keyword %>
+        <%= f.submit '検索' %><br>
+        <%= f.label :model, 'リスト名' %>
+        <%= f.radio_button(:model, :search_list, checked: true) %>
+        <%= f.label :model, 'タグ' %>
+        <%= f.radio_button(:model, :search_tag) %>
+      <% end %>
     <%end%>
   </header>
-    <%= form_with url: search_path, local: :true, method: :get do |f| %>
-      <%= f.label :keyword, '検索' %>
-      <%= f.search_field :keyword %>
-      <%= f.submit '検索' %><br>
-      <%= f.label :model, 'リスト名' %>
-      <%= f.radio_button(:model, :search_list, checked: true) %>
-      <%= f.label :model, 'タグ' %>
-      <%= f.radio_button(:model, :search_tag) %>
-    <% end %>
+
     <%= yield %>
   </body>
 </html>
