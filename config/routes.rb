@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     get '/tag_index', to: 'admins#tag_index'
     get '/search', to: 'admins#search'
   end
-  resources :lists, only: [:show, :create, :edit, :update] do
+  resources :lists, only: [:index, :show, :create, :edit, :update] do
     resources :words, only: [:create, :update] do
       resource :favorites, only: [:create, :destroy]
     end

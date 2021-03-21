@@ -66,3 +66,6 @@ group :production do
   gem 'mysql2'
 end
 gem 'ransack'
+gem 'bootstrap'
+gem 'jquery-rails'
+gem 'kaminari'
