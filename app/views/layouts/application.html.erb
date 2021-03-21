@@ -2,57 +2,81 @@
 <html>
   <head>
     <title>Anquiz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-  <header>
-    <% if admin_signed_in? %>
-      管理者としてログイン
-      <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
-      <%= form_with url: admins_search_path, local: :true, method: :get do |f| %>
-        <%= f.label :keyword, '検索' %>
-        <%= f.search_field :keyword %>
-        <%= f.submit '検索' %><br>
-        <%= f.label :model, 'リスト' %>
-        <%= f.radio_button(:model, :search_list, checked: true) %>
-        <%= f.label :model, 'ユーザー' %>
-        <%= f.radio_button(:model, :search_user) %>
-        <%= f.label :model, 'タグ' %>
-        <%= f.radio_button(:model, :search_tag) %>
-      <% end %>
-    <%elsif user_signed_in? %>
-      <%= User.find(current_user.id).name %>としてログイン
-      <%= link_to 'マイページ', mypage_path %>
-      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-      <%= form_with url: search_path, local: :true, method: :get do |f| %>
-        <%= f.label :keyword, '検索' %>
-        <%= f.search_field :keyword %>
-        <%= f.submit '検索' %><br>
-        <%= f.label :model, 'リスト名' %>
-        <%= f.radio_button(:model, :search_list, checked: true) %>
-        <%= f.label :model, 'タグ' %>
-        <%= f.radio_button(:model, :search_tag) %>
-      <% end %>
-    <%else%>
-      <%= link_to 'ユーザーログイン', new_user_session_path %>
-      <%= link_to '管理者ログイン', new_admin_session_path %>
-      <%= form_with url: search_path, local: :true, method: :get do |f| %>
-        <%= f.label :keyword, '検索' %>
-        <%= f.search_field :keyword %>
-        <%= f.submit '検索' %><br>
-        <%= f.label :model, 'リスト名' %>
-        <%= f.radio_button(:model, :search_list, checked: true) %>
-        <%= f.label :model, 'タグ' %>
-        <%= f.radio_button(:model, :search_tag) %>
-      <% end %>
-    <%end%>
-  </header>
-
+    <nav class="navbar bg-dark">
+      <div class="container-fluid">
+        <div class="navbar-brand border px-3">
+          <%= link_to root_path do %>
+            <div class="text-white"> Anquiz </div>
+          <% end %>
+        </div>
+        <% if user_signed_in? %>
+          <%= form_with url: search_path, local: :true, method: :get, class: "justify-content-left" do |f| %>
+            <div class="form-group row my-auto">
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-outline-secondary m-0 active" >
+                  <%= f.radio_button :model, :search_list, {checked: true} %> リスト名
+                </label>
+                <label class="btn btn-outline-secondary m-0">
+                  <%= f.radio_button :model, :search_tag, {} %> タグ
+                </label>
+              </div>
+              <div class="mx-2">
+                <%= f.search_field :keyword, placeholder: "Search", class: "form-control" %>
+              </div>
+              <div class="my-auto">
+                <%= f.submit 'Search', class: "btn btn-outline-success" %>
+              </div>
+            </div>
+          <% end %>
+          <div class="text-light">ようこそ、<%= current_user.name %>さん</div>
+          <div>
+            <%= link_to "マイページ", mypage_path, class: "btn text-light" %>
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn text-light" %>
+          </div>
+        <% elsif admin_signed_in? %>
+          <div class="row">
+            <%= link_to 'トップページ', admins_path, class: "btn text-light" %>
+            <%= link_to 'リスト一覧', admins_list_index_path, class: "btn text-light" %>
+            <%= link_to 'ユーザー一覧', admins_end_user_index_path, class: "btn text-light" %>
+            <%= link_to 'タグ一覧', admins_tag_index_path, class: "btn text-light" %>
+            <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "btn text-light" %>
+          </div>
+        <% else %>
+          <%= form_with url: search_path, local: :true, method: :get, class: "justify-content-left" do |f| %>
+            <div class="form-group row my-auto">
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-outline-secondary m-0 active" >
+                  <%= f.radio_button :model, :search_list, {checked: true} %> リスト名
+                </label>
+                <label class="btn btn-outline-secondary m-0">
+                  <%= f.radio_button :model, :search_tag, {} %> タグ
+                </label>
+              </div>
+              <div class="mx-2">
+                <%= f.search_field :keyword, placeholder: "Search", class: "form-control" %>
+              </div>
+              <div class="my-auto">
+                <%= f.submit 'Search', class: "btn btn-outline-success" %>
+              </div>
+            </div>
+          <% end %>
+          <div>
+            <%= link_to "ログイン", new_user_session_path, class: "btn text-light" %>
+            <%= link_to "サインアップ", new_user_registration_path, class: "btn text-light" %>
+          </div>
+        <% end %>
+      </div>
+    </nav>
     <%= yield %>
+    <footer class="footer">
+    </footer>
   </body>
 </html>

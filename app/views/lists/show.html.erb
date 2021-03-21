@@ -1,18 +1,92 @@
-<% @list.add_words.each do |add_word| %>
-  <%= add_word.word.question %>
-  <%= link_to "☆", list_word_favorites_path(list_id: params[:id],word_id: add_word.word.id), method: :post %>
-  <%= link_to "★", list_word_favorites_path(list_id: params[:id],word_id: add_word.word), method: :delete %>
-  <%= add_word.word.favorites.count %>
-<% end %>
+<div class="container mb-5">
+  <div class="card text-center m-5">
+    <div class="card-header">
+      単語数：<%= @list.add_words.count %>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%= @list.title %></h5>
+      <p class="card-text"><%= @list.about %></p>
+      <div class="mt-3">
+        タグ：
+        <% @list.tags.each do |tag| %>
+          <%= link_to "#{tag.tag}", search_path(keyword: tag.tag, model: "search_tag"), class: "btn btn-sm btn-outline-dark" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      Created by <%= @list.user.name %>
+    </div>
+  </div>
 
-<% @list.comments.each do |comment| %>
-  <%= comment.user.name %>
-  <%= comment.comment %>
-  <%= link_to "削除", list_comment_path(list_id: params[:id], id: comment.id), method: :delete %>
-<% end %>
+  <% @words.each do |word| %>
+    <% @count = @count.succ %>
+    <div class="card text-center mx-auto w-50 mb-5">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" id="question<%= @count %>-tab" data-toggle="tab" href="#question<%= @count %>" role="tab" aria-controls="question<%= @count %>" aria-selected="true">問<%= @count  %></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="answer<%= @count %>-tab" data-toggle="tab" href="#answer<%= @count %>" role="tab" aria-controls="answer<%= @count %>" aria-selected="false">解答</a>
+          </li>
+          <li class="nav-item ml-auto">
+            <%= link_to "☆#{word.favorites.count}", list_word_favorites_path(list_id: params[:id],word_id: word.id), method: :post %>
+          </li>
+        </ul>
+      </div>
+      <div class="tab-content">
+        <div class="card-body tab-pane active" id="question<%= @count %>" role="tabpanel" aria-labelledby="question<%= @count %>-tab">
+          <h5 class="card-title">
+            <%= word.question %>
+          </h5>
+        </div>
+        <div class="card-body tab-pane" id="answer<%= @count %>" role="tabpanel" aria-labelledby="answer<%= @count %>-tab">
+          <h5 class="card-title">
+            <h5 class="border-bottom">A.　<%= word.answer %></h5><br>
+            <%= word.description %>
+          </h5>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
-<%= form_with(model: [@list, @createComment], local:true) do |f| %>
-  <label for="comment">コメント</label>
-  <%= f.text_area :comment, id: "comment" %>
-  <%= f.submit "投稿" %>
-<% end %>
+
+
+  <% @list.add_words.each do |add_word| %>
+    <%= add_word.word.question %>
+    <%= link_to "☆", list_word_favorites_path(list_id: params[:id],word_id: add_word.word.id), method: :post %>
+    <%= link_to "★", list_word_favorites_path(list_id: params[:id],word_id: add_word.word), method: :delete %>
+    <%= add_word.word.favorites.count %>
+  <% end %>
+
+  <% @list.comments.each do |comment| %>
+    <%= comment.user.name %>
+    <%= comment.comment %>
+    <%= link_to "削除", list_comment_path(list_id: params[:id], id: comment.id), method: :delete %>
+  <% end %>
+
+
+
+  <div class="card w-75 mx-auto">
+    <div class="card-header">
+      Comments.(<%= @list.comments.count %>)
+    </div>
+    <ul class="list-group list-group-flush">
+      <% if user_signed_in? %>
+        <li class="list-group-item">
+          <%= form_with(model: [@list, @createComment], local:true) do |f| %>
+            <%= f.text_area :comment, id: "comment", placeholder: "コメントフォーム", class: "form-control mb-4" %>
+            <p class="text-center"><%= f.submit "投稿", class: "btn btn-outline-secondary w-50"%></p>
+          <% end %>
+        </li>
+      <% end %>
+      <% @list.comments.each do |comment| %>
+        <li class="list-group-item">
+          <%= comment.user.name %><br>
+          <%= comment.comment %>
+          <%= link_to "削除", list_comment_path(list_id: params[:id], id: comment.id), method: :delete %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
