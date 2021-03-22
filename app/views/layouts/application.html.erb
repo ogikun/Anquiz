@@ -13,12 +13,12 @@
     <nav class="navbar bg-dark">
       <div class="container-fluid">
         <div class="navbar-brand border px-3">
-          <%= link_to root_path do %>
+          <%= link_to root_path, class: "text-decoration-none" do %>
             <div class="text-white"> Anquiz </div>
           <% end %>
         </div>
         <% if user_signed_in? %>
-          <%= form_with url: search_path, local: :true, method: :get, class: "justify-content-left" do |f| %>
+          <%= form_with url: search_path, local: :true, method: :get do |f| %>
             <div class="form-group row my-auto">
               <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-outline-secondary m-0 active" >
@@ -29,17 +29,23 @@
                 </label>
               </div>
               <div class="mx-2">
-                <%= f.search_field :keyword, placeholder: "Search", class: "form-control" %>
+                <%= f.search_field :keyword, placeholder: "全体検索", class: "form-control" %>
               </div>
               <div class="my-auto">
-                <%= f.submit 'Search', class: "btn btn-outline-success" %>
+                <%= button_tag type: 'submit', class: "btn btn-outline-success" do %>
+                  <span>　<i class="fas fa-search"></i>　</span>
+                <% end %>
               </div>
             </div>
           <% end %>
           <div class="text-light">ようこそ、<%= current_user.name %>さん</div>
           <div>
-            <%= link_to "マイページ", mypage_path, class: "btn text-light" %>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn text-light" %>
+            <%= link_to mypage_path, class: "btn text-light" do %>
+              <i class="fas fa-user"></i> マイページ
+            <% end %>
+            <%= link_to destroy_user_session_path, method: :delete, class: "btn text-light" do %>
+              <i class="fas fa-sign-out-alt"></i> ログアウト
+            <% end %>
           </div>
         <% elsif admin_signed_in? %>
           <div class="row">
@@ -50,7 +56,7 @@
             <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "btn text-light" %>
           </div>
         <% else %>
-          <%= form_with url: search_path, local: :true, method: :get, class: "justify-content-left" do |f| %>
+          <%= form_with url: search_path, local: :true, method: :get do |f| %>
             <div class="form-group row my-auto">
               <div class="btn-group" data-toggle="buttons">
                 <label class="btn btn-outline-secondary m-0 active" >
@@ -61,22 +67,29 @@
                 </label>
               </div>
               <div class="mx-2">
-                <%= f.search_field :keyword, placeholder: "Search", class: "form-control" %>
+                <%= f.search_field :keyword, placeholder: "全体検索", class: "form-control" %>
               </div>
               <div class="my-auto">
-                <%= f.submit 'Search', class: "btn btn-outline-success" %>
+                <%= button_tag type: 'submit', class: "btn btn-outline-success" do %>
+                  <span>　<i class="fas fa-search"></i>　</span>
+                <% end %>
               </div>
             </div>
           <% end %>
           <div>
-            <%= link_to "ログイン", new_user_session_path, class: "btn text-light" %>
-            <%= link_to "サインアップ", new_user_registration_path, class: "btn text-light" %>
+            <%= link_to new_user_session_path, class: "btn text-light" do %>
+              <i class="fas fa-sign-in-alt"></i> ログイン
+            <% end %>
+            <%= link_to new_user_registration_path, class: "btn text-light" do %>
+              <i class="fas fa-user-plus"></i> サインアップ
+            <% end %>
           </div>
         <% end %>
       </div>
     </nav>
     <%= yield %>
-    <footer class="footer">
+    <footer class="footer bg-dark col-md-12">
+      <p class="text-center text-light p-4">Anquiz</p>
     </footer>
   </body>
 </html>
