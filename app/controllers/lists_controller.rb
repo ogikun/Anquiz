@@ -3,7 +3,6 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
     @createComment = Comment.new
     @tags = @list.tags
-    @count = 0
     @words = @list.words
   end
 
@@ -24,7 +23,9 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
     @createWord = Word.new
     @createTag = Tag.new
+    @createComment = Comment.new
     @tags = @list.tags
+    @words = @list.words
   end
 
   def update
