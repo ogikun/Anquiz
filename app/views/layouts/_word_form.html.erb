@@ -1,0 +1,62 @@
+<div class="card mb-3">
+      <div class="card-header">
+        単語追加
+      </div>
+      <div class="card-body">
+        <%= form_with(model: [list,createWord]) do |f| %>
+          <div class="field p-2">
+            <label for="question">問題</label>
+            <%= f.text_area :question, id: "question", class: "form-control" %>
+          </div>
+          <div class="field p-2">
+              <label for="answer">解答</label>
+              <%= f.text_field :answer, id: "answer", class: "form-control" %>
+          </div>
+          <div class="field p-2">
+            <label for="description">解説</label>
+            <%= f.text_area :description, id: "description", class: "form-control" %>
+          </div>
+          <div class="field mt-4">
+            <p class="text-center"><%= f.submit "単語登録", class: "btn btn-outline-secondary w-50" %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <% count = 0 %>
+    <% words.each do |word| %>
+      <% count = count.succ %>
+      <div class="card mb-3">
+        <div class="card-header">
+          <ul class="nav card-header-tabs">
+            <li class="favoriteBtnZone<%= word.id %> nav-item ml-auto">
+              <%= render "favorites/favorite_btn", word: word %>
+            </li>
+            <li class="nav-item">
+              <span>　</span>
+              <%= link_to list_word_path(list_id: word.lists.ids, id: word.id), method: :delete, remote: true do %>
+                <i class="far fa-times-circle text-dark"></i>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <%= form_with(model: [list,word]) do |f| %>
+            <div class="field p-2">
+              <label for="question">問題</label>
+              <%= f.text_area :question, id: "question", class: "form-control" %>
+            </div>
+            <div class="field p-2">
+              <label for="answer">解答</label>
+              <%= f.text_field :answer, id: "answer", class: "form-control" %>
+            </div>
+            <div class="field p-2">
+              <label for="description">解説</label>
+              <%= f.text_area :description, id: "description", class: "form-control" %>
+            </div>
+            <div class="field mt-4">
+              <p class="text-center"><%= f.submit "更新する", class: "btn btn-success w-50" %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
