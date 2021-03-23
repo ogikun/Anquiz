@@ -8,9 +8,16 @@ class WordsController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
+  def destroy
+    @word = Word.find(params[:id])
+    @word.destroy
+    redirect_back fallback_location: root_path
+  end
+
   def update
     @createword = Word.find(params[:id])
     @createword.update(params_word)
+    redirect_back fallback_location: root_path
   end
 
   private

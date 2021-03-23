@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     get '/search', to: 'admins#search'
   end
   resources :lists, only: [:index, :show, :create, :edit, :update] do
-    resources :words, only: [:create, :update] do
+    resources :words, only: [:create, :destroy, :update] do
       resource :favorites, only: [:create, :destroy]
     end
     resources :tags, only: [:create, :destroy] do
