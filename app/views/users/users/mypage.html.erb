@@ -23,10 +23,9 @@
     <div class="col-md-8">
       <div class="card text-center">
         <div class="card-header">
-          単語数：<%= current_user.favorites.count %>
+          マイリスト数：<%= current_user.favorites.count %>　いいねした数：<%= current_user.favorites.count %>
         </div>
         <div class="card-body">
-          <h5 class="card-title">ブックマーク</h5>
           <%= link_to "マイリスト", bookmark_path, class: "btn btn-info" %>
           <%= link_to "いいねした問題", bookmark_path, class: "btn btn-info" %>
         </div>

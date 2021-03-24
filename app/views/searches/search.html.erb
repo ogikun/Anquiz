@@ -2,15 +2,21 @@
   <div class="offset-md-2 col-md-8">
     <% if params[:model] == "search_tag" %>
       <% if @results %>
+        <h3>"<%= params[:keyword] %>"のタグ検索結果</h3>
         <%= render "layouts/list_index", lists: @results %>
       <% else %>
-        検索結果はありません
+        <h3>検索結果はありません</h3>
       <% end %>
     <% else %>
-      <% if @results %>
+      <% if @results.exists? %>
+        <% if params[:keyword] == "" %>
+          <h3>全リスト</h3>
+        <% else %>
+          <h3>"<%= params[:keyword] %>"のリスト名検索結果</h3>
+        <% end %>
         <%= render "layouts/list_index", lists: @results %>
       <% else %>
-        検索結果はありません
+        <h3>検索結果はありません</h3>
       <% end %>
     <% end %>
   </div>

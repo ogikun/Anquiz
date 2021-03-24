@@ -5,7 +5,7 @@
         単語数：<%= @list.add_words.count %>
       </div>
       <div class="card-body">
-        <%= form_with model: @list, local: true do |f| %>
+        <%= form_with model: @list do |f| %>
           <div class="field mb-2">
             <%= f.text_field :title, id: "title", class: "form-control" %>
           </div>
@@ -13,7 +13,7 @@
             <%= f.text_area :about, id: "about", class: "form-control" %>
           </div>
           <div class="row mt-3">
-            <p class="btn-group col-6" data-toggle="buttons">
+            <p class="btn-group col-lg-6 col-md-12" data-toggle="buttons">
               <label class="btn btn-outline-secondary m-0" >
                 <%= f.radio_button :public_status, '1', {} %> 公開
               </label>
@@ -21,100 +21,30 @@
                 <%= f.radio_button :public_status, '0', {} %> 非公開
               </label>
             </p>
-            <div class="field col-6">
+            <div class="field col-lg-6 col-md-12">
               <p class="text-center"><%= f.submit "更新", class: "btn btn-success text-center w-100" %></p>
             </div>
           </div>
         <% end %>
-        <div>
-          <span class="mb-2">タグ：</span>
-          <% @list.tags.each do |tag| %>
-            <%= link_to list_tag_taggings_path(list_id: params[:id], tag_id: tag.id), method: :delete, class: "btn btn-sm btn-outline-dark mb-2" do %>
-              <%= tag.tag %> <i class="far fa-times-circle"></i>
-            <% end %>
-          <% end %>
+        <div class="tagFormZone">
+          <%= render "layouts/tag_form", list: @list, createTag: @createTag %>
         </div>
-        <%= form_with(model: [@list,@createTag], local: true) do |f| %>
-          <div class="d-flex">
-            <%= f.text_field :tag, placeholder: "タグを追加", class: "form-control" %>
-            <%= button_tag type:"submit", class: "btn btn-outline-secondary" do %>
-              <i class="fas fa-plus"></i>
-            <% end %>
-          </div>
-        <% end %>
       </div>
       <div class="card-footer text-muted">
-        Created by <%= @list.user.name %>
-      </div>
-    </div>
-    <div class="card mb-3">
-      <div class="card-header">
-        単語追加
-      </div>
-      <div class="card-body">
-        <%= form_with(model: [@list,@createWord], local: true) do |f| %>
-          <div class="field p-2">
-            <label for="question">問題</label>
-            <%= f.text_area :question, id: "question", class: "form-control" %>
+        <div class="row">
+          <div class="col-6">Created by <%= @list.user.name %></div>
+          <div class="offset-5 col-1">
+            <%= link_to list_path(id: params[:id]), method: :delete do %>
+              <i class="fas fa-trash-alt text-secondary"></i>
+            <% end %>
           </div>
-          <div class="field p-2">
-              <label for="answer">解答</label>
-              <%= f.text_field :answer, id: "answer", class: "form-control" %>
-          </div>
-          <div class="field p-2">
-            <label for="description">解説</label>
-            <%= f.text_area :description, id: "description", class: "form-control" %>
-          </div>
-          <div class="field mt-4">
-            <p class="text-center"><%= f.submit "単語登録", class: "btn btn-outline-secondary w-50" %></p>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    <% count = 0 %>
-    <% @words.each do |word| %>
-      <% count = count.succ %>
-      <div class="card mb-3">
-        <div class="card-header">
-          <ul class="nav card-header-tabs">
-            <li class="favoriteBtnZone<%= word.id %> nav-item ml-auto">
-              <%= render "favorites/favorite_btn", word: word %>
-            </li>
-            <li class="nav-item ml-auto">
-              <%= link_to list_word_path(list_id: params[:id], id: word.id), method: :delete do %>
-                <i class="far fa-times-circle text-dark"></i>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-        <div class="card-body">
-          <%= form_with(model: [@list,word], local: true) do |f| %>
-            <div class="field p-2">
-              <label for="question">問題</label>
-              <%= f.text_area :question, id: "question", class: "form-control" %>
-            </div>
-            <div class="field p-2">
-              <label for="answer">解答</label>
-              <%= f.text_field :answer, id: "answer", class: "form-control" %>
-            </div>
-            <div class="field p-2">
-              <label for="description">解説</label>
-              <%= f.text_area :description, id: "description", class: "form-control" %>
-            </div>
-            <div class="field mt-4">
-              <div class="row text-center">
-                <div class="col-6">
-                  <p class="text-center"><%= f.submit "更新する", class: "btn btn-success w-50" %></p>
-                </div>
-                <div class="col-6">
-                  <%= link_to "削除する", list_word_path(list_id: params[:id], id: word.id), method: :delete, class: "btn btn-danger w-50" %>
-                </div>
-              </div>
-            </div>
-          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
+
+    <div class="wordFormZone">
+      <%= render "layouts/word_form", list: @list, createWord: @createWord, words: @words %>
+    </div>
 
     <div class="card mx-auto">
       <div class="card-header">
