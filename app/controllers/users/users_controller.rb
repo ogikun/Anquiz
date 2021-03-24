@@ -1,10 +1,11 @@
 class Users::UsersController < ApplicationController
   def mypage
-    @lists = List.where(user_id: current_user.id)
+    @lists = List.where(user_id: current_user.id).page(params[:page]).per(8)
     @createList = List.new
   end
 
   def bookmark
+    @words = current_user.words.page(params[:page]).per(10)
   end
 
   def edit

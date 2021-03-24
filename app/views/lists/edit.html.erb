@@ -31,7 +31,14 @@
         </div>
       </div>
       <div class="card-footer text-muted">
-        Created by <%= @list.user.name %>
+        <div class="row">
+          <div class="col-6">Created by <%= @list.user.name %></div>
+          <div class="offset-5 col-1">
+            <%= link_to list_path(id: params[:id]), method: :delete do %>
+              <i class="fas fa-trash-alt text-secondary"></i>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
 

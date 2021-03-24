@@ -18,39 +18,7 @@
         Created by <%= @list.user.name %>
       </div>
     </div>
-    <% count = 0 %>
-    <% @words.each do |word| %>
-      <% count = count.succ %>
-      <div class="card text-center mx-auto mb-5">
-        <div class="card-header">
-          <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-              <a class="nav-link active" id="question<%= count %>-tab" data-toggle="tab" href="#question<%= count %>" role="tab" aria-controls="question<%= count %>" aria-selected="true">問<%= count  %></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="answer<%= count %>-tab" data-toggle="tab" href="#answer<%= count %>" role="tab" aria-controls="answer<%= count %>" aria-selected="false">解答</a>
-            </li>
-            <li class="favoriteBtnZone<%= word.id %> nav-item ml-auto">
-              <%= render "favorites/favorite_btn", word: word %>
-            </li>
-          </ul>
-        </div>
-        <div class="tab-content">
-          <div class="card-body tab-pane active" id="question<%= count %>" role="tabpanel" aria-labelledby="question<%= count %>-tab">
-            <h5 class="card-title">
-              <%= word.question %>
-            </h5>
-          </div>
-          <div class="card-body tab-pane" id="answer<%= count %>" role="tabpanel" aria-labelledby="answer<%= count %>-tab">
-            <h5 class="card-title">
-              <h5 class="border-bottom">A.　<%= word.answer %></h5><br>
-              <%= word.description %>
-            </h5>
-          </div>
-        </div>
-      </div>
-    <% end %>
-
+    <%= render "layouts/word_index", words: @words%>
     <div class="card mx-auto">
       <div class="card-header">
         Comments.(<%= @list.comments.count %>)
