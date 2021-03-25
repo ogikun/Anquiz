@@ -11,7 +11,7 @@ class Admins::AdminsController < ApplicationController
   end
 
   def list_index
-    @lists = List.all
+    @lists = List.all.reverse_order.page(params[:page]).per(10)
   end
 
   def list

@@ -1,6 +1,6 @@
 class Users::UsersController < ApplicationController
   def mypage
-    @lists = List.where(user_id: current_user.id).page(params[:page]).per(8)
+    @lists = List.where(user_id: current_user.id).reverse_order.page(params[:page]).per(8)
     @createList = List.new
   end
 
