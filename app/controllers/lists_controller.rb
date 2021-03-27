@@ -1,4 +1,5 @@
 class ListsController < ApplicationController
+  before_action :authenticate_user!,{only: [:edit]}
   def show
     @list = List.find(params[:id])
     @createComment = Comment.new
@@ -7,7 +8,7 @@ class ListsController < ApplicationController
   end
 
   def create
-    @createList = List.new(params_list)
+    @createList = List.new(list_params)
     @createList.user_id = current_user.id
     @createList.public_status = 0
     @createList.title = if_input_blank(@createList.title)
@@ -21,16 +22,20 @@ class ListsController < ApplicationController
 
   def edit
     @list = List.find(params[:id])
-    @createWord = Word.new
-    @createTag = Tag.new
-    @createComment = Comment.new
-    @tags = @list.tags
-    @words = @list.words
+    if @list.user_id == current_user.id
+      @createWord = Word.new
+      @createTag = Tag.new
+      @createComment = Comment.new
+      @tags = @list.tags
+      @words = @list.words
+    else
+      redirect_to mypage_path
+    end
   end
 
   def update
     @list = List.find(params[:id])
-    if @list.update(params_list)
+    if @list.update(list_params)
       redirect_to edit_list_path(params[:id])
     else
       render edit_list_path
@@ -53,7 +58,7 @@ class ListsController < ApplicationController
     end
   end
 
-  def params_list
+  def list_params
     params.require(:list).permit(:user_id, :title, :about, :public_status)
   end
 end

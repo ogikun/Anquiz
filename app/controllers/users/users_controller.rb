@@ -1,4 +1,6 @@
 class Users::UsersController < ApplicationController
+  before_action :authenticate_user!
+
   def mypage
     @lists = List.where(user_id: current_user.id).reverse_order.page(params[:page]).per(8)
     @createList = List.new
@@ -6,6 +8,10 @@ class Users::UsersController < ApplicationController
 
   def bookmark
     @words = current_user.words.page(params[:page]).per(10)
+  end
+
+  def mylist
+    @lists = current_user.lists.page(params[:page]).per(10)
   end
 
   def edit
@@ -19,6 +25,13 @@ class Users::UsersController < ApplicationController
     else
       render action: :edit
     end
+  end
+
+  def delete_user
+    user = current_user
+    user.is_deleted = true
+    user.save
+    redirect_to root_path
   end
 
   private

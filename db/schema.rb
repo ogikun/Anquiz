@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_17_185756) do
+ActiveRecord::Schema.define(version: 2021_03_27_081037) do
 
   create_table "add_words", force: :cascade do |t|
     t.integer "list_id", null: false
@@ -62,6 +62,15 @@ ActiveRecord::Schema.define(version: 2021_03_17_185756) do
     t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
+  create_table "mylists", force: :cascade do |t|
+    t.integer "list_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_mylists_on_list_id"
+    t.index ["user_id"], name: "index_mylists_on_user_id"
+  end
+
   create_table "taggings", force: :cascade do |t|
     t.integer "list_id", null: false
     t.integer "tag_id", null: false
@@ -84,7 +93,7 @@ ActiveRecord::Schema.define(version: 2021_03_17_185756) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name", null: false
-    t.boolean "is_delete", default: false, null: false
+    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -1,0 +1,16 @@
+<div class="container my-md-5">
+  <div class="offset-md-2 col-md-8">
+    <% if !@lists.empty? %>
+      <h3>マイリスト一覧</h3>
+      <%= render "layouts/list_index", lists: @lists%>
+      <div class="col-12 d-flex">
+        <div class="mx-auto"><%= paginate @lists %></div>
+      </div>
+    <% else %>
+      <h3>マイリストがありません</h3>
+    <% end %>
+  </div>
+</div>
+
+
+
