@@ -3,7 +3,7 @@ class WordsController < ApplicationController
     @list = List.find(params[:list_id])
     @createWord = Word.new
     @words = @list.words
-    createWord = Word.new(params_word)
+    createWord = Word.new(word_params)
     createWord.public_status = 0
     createWord.user_id = current_user.id
     createWord.save
@@ -23,12 +23,12 @@ class WordsController < ApplicationController
     @createWord = Word.new
     @words = @list.words
     createword = Word.find(params[:id])
-    createword.update(params_word)
+    createword.update(word_params)
   end
 
   private
 
-  def params_word
+  def word_params
     params.require(:word).permit(:question, :answer, :description, :public_status)
   end
 end

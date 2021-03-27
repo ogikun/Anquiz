@@ -1,0 +1,29 @@
+<div class="container my-md-5">
+  <div class="row">
+    <div class="bg-light p-5 offset-md-2 col-md-8 border">
+    <h2>ユーザー情報変更</h2>
+      <%= form_with model: @user, url: admins_end_user_path, local:true do |f| %>
+        <div class="field p-3">
+          <label for="inputName">ユーザーネーム</label><br>
+          <%= f.text_field :name, autofocus: true, id: "inputName", class: "form-control"  %>
+        </div>
+        <div class="field p-3">
+          <label for="inputEmail">メールアドレス</label><br>
+          <%= f.email_field :email, autofocus: true, id: "inputEmail", class: "form-control" %>
+        </div>
+        <div class="field p-3 text-center">
+          <label>
+            <%= f.radio_button :is_deleted, :false, {} %> 有効
+          </label>
+          <span>　</span>
+          <label>
+            <%= f.radio_button :is_deleted, :true, {} %> 退会
+          </label>
+        </div>
+        <div class="actions p-3 mt-4">
+          <%= f.submit "変更", class: "btn btn-outline-success w-100" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

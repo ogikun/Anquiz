@@ -15,6 +15,9 @@
     </div>
     <div class="card-footer text-muted">
       <%= link_to "単語帳を見る", list_path(list), class: "btn btn-info" %>
+      <span class="mylistBtnZone<%= list.id %>">
+        <%= render "mylists/mylist_btn", list: list %>
+      </span>
       <% if list.user == current_user %>
         <%= link_to  edit_list_path(list.id), class: "btn btn-outline-secondary" do %>
           <i class="fas fa-cog"></i>

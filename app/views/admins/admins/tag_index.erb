@@ -1,0 +1,27 @@
+<div class="container my-md-5">
+  <div class="offset-md-3 col-md-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>タグ名</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tags.each do |tag| %>
+          <tr>
+            <td><%= tag.tag %></td>
+            <td>
+              <%= link_to admins_tag_path(id: tag.id), method: :delete, class: "text-secondary text-right" do %>
+                <div><i class="far fa-times-circle"></i></div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="col-12 d-flex">
+        <div class="mx-auto"><%= paginate @tags %></div>
+      </div>
+  </div>
+</div>

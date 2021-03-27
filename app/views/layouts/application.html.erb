@@ -50,9 +50,9 @@
         <% elsif admin_signed_in? %>
           <div class="row">
             <%= link_to 'トップページ', admins_path, class: "btn text-light" %>
-            <%= link_to 'リスト一覧', admins_list_index_path, class: "btn text-light" %>
-            <%= link_to 'ユーザー一覧', admins_end_user_index_path, class: "btn text-light" %>
-            <%= link_to 'タグ一覧', admins_tag_index_path, class: "btn text-light" %>
+            <%= link_to 'リスト一覧', admins_lists_path, class: "btn text-light" %>
+            <%= link_to 'ユーザー一覧', admins_end_users_path, class: "btn text-light" %>
+            <%= link_to 'タグ一覧', admins_tags_path, class: "btn text-light" %>
             <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "btn text-light" %>
           </div>
         <% else %>

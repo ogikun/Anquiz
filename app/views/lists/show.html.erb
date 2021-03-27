@@ -14,6 +14,9 @@
           <% end %>
         </div>
       </div>
+      <p class="mylistBtnZone<%= @list.id %>">
+        <%= render "mylists/mylist_btn", list: @list %>
+      </p>
       <div class="card-footer text-muted">
         Created by <%= @list.user.name %>
       </div>
