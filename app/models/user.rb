@@ -11,5 +11,9 @@ class User < ApplicationRecord
   has_many :lists, dependent: :destroy, through: :mylists
   has_many :comments, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
+
+  def active_for_authentication?
+    super && (self.is_deleted == false)
+  end
 end

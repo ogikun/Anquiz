@@ -1,0 +1,30 @@
+<div class="container mb-5">
+  <div class="offset-md-2 col-md-8">
+    <div class="card text-center my-5">
+      <div class="card-body">
+        <h5 class="card-title"><%= @list.title %></h5>
+        <p>
+          <% if params[:page] %>
+            <%= params[:page] %>
+          <% else %>
+            1
+          <% end %>
+          /
+          <%= @list.words.count %>
+        </p>
+        <div class="mylistBtnZone<%= @list.id %>">
+          <%= render "mylists/mylist_btn", list: @list %>
+        </div>
+      </div>
+    </div>
+
+    <% @words.each do |word| %>
+      <div class="questionZone">
+        <%= render "layouts/question", word: word %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-12 d-flex">
+    <div class="justify mx-auto"><%= paginate @words, window: 1 %></div>
+  </div>
+</div>

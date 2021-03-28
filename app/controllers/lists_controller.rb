@@ -48,6 +48,20 @@ class ListsController < ApplicationController
     redirect_to mypage_path
   end
 
+  def question
+    @list = List.find(params[:list_id])
+    @words = @list.words.page(params[:page]).per(1)
+  end
+
+  def solve
+    @word = Word.find(params[:word])
+    if @word.answer == params[:answer]
+      @rightAnswer = "true"
+    else
+      @rightAnswer = "false"
+    end
+  end
+
   private
 
   def if_input_blank(input)

@@ -8,4 +8,6 @@
       <p class="text-warning"><i class="fas fa-star"></i> <%= word.favorites.count %></p>
     <% end %>
   <% end %>
+<% else %>
+  <p class="text-dark"><i class="far fa-star"></i> <%= word.favorites.count %></p>
 <% end %>
