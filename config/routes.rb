@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admins
-  devise_for :users, path_names: { edit: 'password_edit' }, controllers: { registrations: 'users/registrations' }
+  devise_for :users, path_names: { edit: 'password_edit' }, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'homes#top'
   get '/search', to: 'searches#search', as: 'search'
@@ -33,5 +33,7 @@ Rails.application.routes.draw do
     end
     resources :comments, only: [:create, :destroy]
     resource :mylists, only: [:create, :destroy]
+    get '/question', to: 'lists#question'
+    post '/solve', to: 'lists#solve'
   end
 end

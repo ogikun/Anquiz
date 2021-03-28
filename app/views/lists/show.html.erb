@@ -14,9 +14,16 @@
           <% end %>
         </div>
       </div>
-      <p class="mylistBtnZone<%= @list.id %>">
-        <%= render "mylists/mylist_btn", list: @list %>
-      </p>
+      <div class="d-flex mx-auto">
+        <p class="mylistBtnZone<%= @list.id %>">
+          <%= link_to list_question_path(list_id: @list.id), class: "btn btn-info" do %>
+            <i class="fas fa-pen"></i>
+          <% end %>
+        </p>
+        <p class="mylistBtnZone<%= @list.id %> ml-2">
+          <%= render "mylists/mylist_btn", list: @list %>
+        </p>
+      </div>
       <div class="card-footer text-muted">
         Created by <%= @list.user.name %>
       </div>

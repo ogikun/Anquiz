@@ -23,7 +23,14 @@
     <div class="col-md-8">
       <div class="card text-center">
         <div class="card-header">
-          マイリスト数：<%= current_user.mylists.count %>　いいねした数：<%= current_user.favorites.count %>
+          <div class="row">
+            <div class="col-md-12 col-lg-6 text-lg-right">
+              マイリスト数：<%= current_user.mylists.count %>
+            </div>
+            <div class="col-md-12 col-lg-6 text-lg-left">
+              いいねした数：<%= current_user.favorites.count %>
+            </div>
+          </div>
         </div>
         <div class="card-body">
           <%= link_to "マイリスト", mylist_path, class: "btn btn-info" %>
