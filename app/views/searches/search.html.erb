@@ -9,11 +9,7 @@
       <% end %>
     <% else %>
       <% if @results %>
-        <% if params[:keyword] == "" %>
-          <h3>全てのリスト</h3>
-        <% else %>
-          <h3>"<%= params[:keyword] %>"のリスト名検索結果</h3>
-        <% end %>
+        <h3>"<%= params[:keyword] %>"を含むリスト名</h3>
         <%= render "layouts/list_index", lists: @results %>
       <% else %>
         <h3>検索結果はありません</h3>

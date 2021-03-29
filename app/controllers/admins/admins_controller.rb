@@ -16,6 +16,7 @@ class Admins::AdminsController < ApplicationController
 
   def end_user
     @user = User.find(params[:id])
+    @lists = List.ransack(user_id_eq: params[:id]).result.page(params[:page]).per(30)
   end
 
   def list_index
@@ -48,14 +49,15 @@ class Admins::AdminsController < ApplicationController
   end
 
   def search
-    if params[:model] == "search_list"
-      @lists = List.ransack(title_or_about_cont: params[:keyword]).result
-      render :end_user_index
-    elsif params[:model] == "search_user"
-      @users = User.ransack(name_or_email_cont: params[:keyword]).result
+    if params[:button] == "list"
+      @lists = List.ransack(title_or_about_cont: params[:keyword]).result.page(params[:page]).per(30)
       render :list_index
+    elsif params[:button] == "end_user"
+      @users = User.ransack(name_or_email_cont: params[:keyword]).result.page(params[:page]).per(30)
+      render :end_user_index
     else
-      @tags = Tag.ransack(tag_cont: params[:keyword]).result
+      @tags = Tag.ransack(tag_cont: params[:keyword]).result.page(params[:page]).per(30)
+      render :tag_index
     end
   end
 

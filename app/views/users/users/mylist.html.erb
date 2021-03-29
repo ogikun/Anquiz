@@ -1,38 +1,8 @@
 <div class="container p-0 my-5">
   <div class="offset-md-2 col-md-8">
-    <% if !@mylists.empty? %>
+    <% if !@lists.empty? %>
       <h3>マイリスト一覧</h3>
-      <% @mylists.each do |mylist| %>
-        <div class="card text-center my-4">
-          <div class="card-header">
-            単語数：<%= mylist.list.add_words.count %>　
-          </div>
-          <div class="card-body">
-            <h5 class="card-title"><%= mylist.list.title %></h5>
-            <p class="card-text"><%= mylist.list.about %></p>
-            <div class="mt-3">
-              タグ：
-              <% mylist.list.tags.each do |tag| %>
-                <%= link_to "#{tag.tag}", search_path(keyword: tag.tag, model: "search_tag"), class: "btn btn-sm btn-outline-dark" %>
-              <% end %>
-            </div>
-          </div>
-          <div class="card-footer text-muted">
-            <%= link_to "単語帳を見る", list_path(mylist.list), class: "btn btn-info" %>
-            <span class="mylistBtnZone<%= mylist.list.id %>">
-              <%= render "mylists/mylist_btn", list: mylist.list %>
-            </span>
-            <% if mylist.user == current_user %>
-              <%= link_to  edit_list_path(mylist.list.id), class: "btn btn-outline-secondary" do %>
-                <i class="fas fa-cog"></i>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-      <div class="col-12 d-flex mb-4">
-        <div class="mx-auto"><%= paginate @mylists %></div>
-      </div>
+      <%= render "layouts/list_index", lists: @lists %>
     <% else %>
       <h3>マイリストがありません</h3>
     <% end %>

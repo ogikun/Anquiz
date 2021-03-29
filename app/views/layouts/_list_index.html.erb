@@ -15,6 +15,9 @@
     </div>
     <div class="card-footer text-muted">
       <%= link_to "単語帳を見る", list_path(list), class: "btn btn-info" %>
+      <%= link_to list_question_path(list_id: list.id), class: "btn btn-info" do %>
+        <i class="fas fa-pen"></i> 解く
+      <% end %>
       <span class="mylistBtnZone<%= list.id %>">
         <%= render "mylists/mylist_btn", list: list %>
       </span>
