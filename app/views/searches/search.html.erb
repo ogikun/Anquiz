@@ -1,6 +1,6 @@
-<div class="container my-5">
+<div class="container p-0 my-5">
   <div class="offset-md-2 col-md-8">
-    <% if params[:model] == "search_tag" %>
+    <% if params[:button] == "search_tag" %>
       <% if @results %>
         <h3>"<%= params[:keyword] %>"のタグ検索結果</h3>
         <%= render "layouts/list_index", lists: @results %>
@@ -8,7 +8,7 @@
         <h3>検索結果はありません</h3>
       <% end %>
     <% else %>
-      <% if @results.exists? %>
+      <% if @results %>
         <% if params[:keyword] == "" %>
           <h3>全てのリスト</h3>
         <% else %>

@@ -1,1 +1,25 @@
-Top
+<div class="container my-5">
+  <div class="mainVisual d-flex">
+    <div class="m-auto bg-secondary p-3 text-light">
+      <h3>Anquiz</h3>
+      <p>Anquizはクイズ形式で単語を覚えることができる単語帳アプリです。</p>
+      <% if !user_signed_in? %>
+        <div class="row">
+          <div class="col-6 text-right">
+            <p></p>
+            <%= link_to new_user_session_path, class: "btn btn-outline-light" do %>
+              <i class="fas fa-sign-in-alt"></i> ログイン
+            <% end %>
+          </div>
+          <div class="col-6">
+            <p></p>
+            <%= link_to new_user_registration_path, class: "btn btn-outline-light" do %>
+              <i class="fas fa-user-plus"></i> サインアップ
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+  </div>
+</div>

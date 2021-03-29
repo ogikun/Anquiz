@@ -7,11 +7,11 @@ class Users::UsersController < ApplicationController
   end
 
   def bookmark
-    @words = current_user.words.page(params[:page]).per(10)
+    @favorites = current_user.favorites.reverse_order.page(params[:page]).per(10)
   end
 
   def mylist
-    @lists = current_user.lists.page(params[:page]).per(10)
+    @mylists = current_user.mylists.reverse_order.page(params[:page]).per(10)
   end
 
   def edit
