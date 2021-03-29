@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+  <% if Mylist.find_by(user_id: current_user.id, list_id: list.id).nil? %>
+    <%= link_to  list_mylists_path(list.id), method: :post, remote: true, class: "btn btn-outline-secondary" do %>
+      <i class="fas fa-folder-plus"></i>
+    <% end %>
+  <% else %>
+    <%= link_to  list_mylists_path(list.id), method: :delete, remote: true, class: "btn btn-outline-secondary active" do %>
+      <i class="fas fa-folder-plus"></i>
+    <% end %>
+  <% end %>
+<% end %>

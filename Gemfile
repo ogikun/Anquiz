@@ -65,3 +65,8 @@ gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
 end
+gem 'ransack'
+gem 'bootstrap'
+gem 'jquery-rails'
+gem 'kaminari'
+gem 'font-awesome-sass'

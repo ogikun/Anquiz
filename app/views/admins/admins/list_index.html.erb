@@ -1,0 +1,27 @@
+<div class="container my-md-5">
+  <div class="offset-md-2 col-md-8">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>リスト名</th>
+          <th>作成者</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @lists.each do |list| %>
+          <tr>
+            <td><%= list.id %></td>
+            <td><%= list.title %></td>
+            <td><%= list.user.name %></td>
+            <td><%= link_to "詳細", admins_list_path(list) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="col-12 d-flex">
+        <div class="mx-auto"><%= paginate @lists %></div>
+      </div>
+  </div>
+</div>

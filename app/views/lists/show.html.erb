@@ -1,0 +1,62 @@
+<div class="container p-0 mb-5">
+  <div class="offset-md-2 col-md-8">
+    <div class="card text-center my-5">
+      <div class="card-header">
+        単語数：<%= @list.add_words.count %>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= @list.title %></h5>
+        <p class="card-text"><%= @list.about %></p>
+        <div class="mt-3">
+          タグ：
+          <% @list.tags.each do |tag| %>
+            <%= link_to "#{tag.tag}", search_path(keyword: tag.tag, model: "search_tag"), class: "btn btn-sm btn-outline-dark" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="d-flex mx-auto">
+        <p class="mylistBtnZone<%= @list.id %>">
+          <%= link_to list_question_path(list_id: @list.id), class: "btn btn-info" do %>
+            <i class="fas fa-pen"></i>
+          <% end %>
+        </p>
+        <p class="mylistBtnZone<%= @list.id %> ml-2">
+          <%= render "mylists/mylist_btn", list: @list %>
+        </p>
+      </div>
+      <div class="card-footer text-muted">
+        Created by <%= @list.user.name %>
+      </div>
+    </div>
+    <%= render "layouts/word_index", words: @words%>
+    <div class="card mx-auto">
+      <div class="card-header">
+        Comments.(<%= @list.comments.count %>)
+      </div>
+      <ul class="list-group list-group-flush">
+        <% if user_signed_in? %>
+          <li class="list-group-item">
+            <%= form_with(model: [@list, @createComment], local:true) do |f| %>
+              <%= f.text_area :comment, id: "comment", placeholder: "コメントフォーム", class: "form-control mb-4" %>
+              <p class="text-center"><%= f.submit "投稿", class: "btn btn-outline-secondary w-50"%></p>
+            <% end %>
+          </li>
+        <% end %>
+        <% count = 0 %>
+        <% @list.comments.each do |comment| %>
+          <% count = count.succ %>
+          <li class="list-group-item">
+            <%= count %>.<br>
+            <%= comment.comment %><br>
+            From: <%= comment.user.name %>
+            <% if comment.user == current_user %>
+              <%= link_to list_comment_path(list_id: params[:id], id: comment.id), method: :delete do %>
+                <i class="fas fa-trash-alt text-secondary"></i>
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

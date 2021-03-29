@@ -1,0 +1,48 @@
+<% if @rightAnswer == "true" %>
+  <div class="card text-center mx-auto mb-5 alert alert-success">
+    <div class="card-body">
+      <h5 class="card-title mb-4">
+        A. <%= word.answer %>
+      </h5>
+      <%= word.description %>
+    </div>
+  </div>
+  <% elsif @rightAnswer == "false" %>
+  <div class="card text-center mx-auto mb-5 alert alert-danger">
+    <div class="card-body">
+      <h5 class="card-title mb-4">
+        Q. <%= word.question %>
+      </h5>
+      <%= form_with url: list_solve_path do |f| %>
+        <div class="row">
+          <div class="col-12">
+            <%= f.text_field :answer, placeholder: "解答", class: "form-control" %>
+            <%= f.hidden_field :word, value: word.id %>
+            <%= button_tag type: 'submit', class: "btn btn-success mt-4" do %>
+              <i class="fas fa-pen"></i> 判定
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% else %>
+  <div class="card text-center mx-auto mb-5">
+    <div class="card-body">
+      <h5 class="card-title mb-4">
+        Q. <%= word.question %>
+      </h5>
+      <%= form_with url: list_solve_path do |f| %>
+        <div class="row">
+          <div class="col-12">
+            <%= f.text_field :answer, placeholder: "解答", class: "form-control" %>
+            <%= f.hidden_field :word, value: word.id %>
+            <%= button_tag type: 'submit', class: "btn btn-success mt-4" do %>
+              <i class="fas fa-pen"></i> 判定
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

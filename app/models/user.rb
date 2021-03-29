@@ -4,7 +4,16 @@ class User < ApplicationRecord
   devise :database_authenticatable,:registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :lists
+  has_many :lists, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :words, dependent: :destroy, through: :favorites
+  has_many :mylists, dependent: :destroy
+  has_many :lists, dependent: :destroy, through: :mylists
+  has_many :comments, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
+
+  def active_for_authentication?
+    super && (self.is_deleted == false)
+  end
 end

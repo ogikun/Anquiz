@@ -1,21 +1,34 @@
 class WordsController < ApplicationController
   def create
-    createWord = Word.new(params_word)
+    @list = List.find(params[:list_id])
+    @createWord = Word.new
+    @words = @list.words
+    createWord = Word.new(word_params)
     createWord.public_status = 0
     createWord.user_id = current_user.id
-    if createWord.save
-      redirect_back fallback_location: root_path
-    else
-      redirect_back fallback_location: root_path
-    end
+    createWord.save
+    AddWord.create(list_id: params[:list_id], word_id: createWord.id)
+  end
+
+  def destroy
+    @list = List.find(params[:list_id])
+    @createWord = Word.new
+    @words = @list.words
+    word = Word.find(params[:id])
+    word.destroy
   end
 
   def update
+    @list = List.find(params[:list_id])
+    @createWord = Word.new
+    @words = @list.words
+    createword = Word.find(params[:id])
+    createword.update(word_params)
   end
 
   private
 
-  def params_word
+  def word_params
     params.require(:word).permit(:question, :answer, :description, :public_status)
   end
 end

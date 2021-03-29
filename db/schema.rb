@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_11_172033) do
+ActiveRecord::Schema.define(version: 2021_03_27_081037) do
 
   create_table "add_words", force: :cascade do |t|
     t.integer "list_id", null: false
     t.integer "word_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_add_words_on_list_id"
+    t.index ["word_id"], name: "index_add_words_on_word_id"
   end
 
   create_table "admins", force: :cascade do |t|
@@ -31,11 +33,23 @@ ActiveRecord::Schema.define(version: 2021_03_11_172033) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "favorites", force: :cascade do |t|
-    t.integer "user_id", null: false
+  create_table "comments", force: :cascade do |t|
     t.integer "list_id", null: false
+    t.integer "user_id", null: false
+    t.text "comment", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_comments_on_list_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "word_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+    t.index ["word_id"], name: "index_favorites_on_word_id"
   end
 
   create_table "lists", force: :cascade do |t|
@@ -43,6 +57,31 @@ ActiveRecord::Schema.define(version: 2021_03_11_172033) do
     t.string "title", null: false
     t.text "about", null: false
     t.integer "public_status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_lists_on_user_id"
+  end
+
+  create_table "mylists", force: :cascade do |t|
+    t.integer "list_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_mylists_on_list_id"
+    t.index ["user_id"], name: "index_mylists_on_user_id"
+  end
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer "list_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_taggings_on_list_id"
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "tag", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -54,7 +93,7 @@ ActiveRecord::Schema.define(version: 2021_03_11_172033) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name", null: false
-    t.boolean "is_delete", default: false, null: false
+    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -69,6 +108,7 @@ ActiveRecord::Schema.define(version: 2021_03_11_172033) do
     t.integer "public_status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_words_on_user_id"
   end
 
 end

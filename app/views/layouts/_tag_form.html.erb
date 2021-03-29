@@ -1,0 +1,14 @@
+<span class="mb-2">タグ：</span>
+<% list.tags.each do |tag| %>
+  <%= link_to list_tag_taggings_path(list_id: list.id, tag_id: tag.id), method: :delete, remote: true, class: "btn btn-sm btn-outline-dark mb-2" do %>
+    <%= tag.tag %> <i class="far fa-times-circle"></i>
+  <% end %>
+<% end %>
+<%= form_with model: [list,createTag] do |f| %>
+  <div class="d-flex">
+    <%= f.text_field :tag, placeholder: "タグを追加", class: "form-control" %>
+    <%= button_tag type:"submit", class: "btn btn-outline-secondary" do %>
+      <i class="fas fa-plus"></i>
+    <% end %>
+  </div>
+<% end %>

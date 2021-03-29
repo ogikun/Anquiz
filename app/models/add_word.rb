@@ -1,4 +1,4 @@
 class AddWord < ApplicationRecord
   belongs_to :list
-  belongs_to :user
+  belongs_to :word
 end
