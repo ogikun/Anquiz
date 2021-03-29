@@ -7,7 +7,7 @@
       <%= word.description %>
     </div>
   </div>
-  <% elsif @rightAnswer == "false" %>
+<% elsif @rightAnswer == "false" %>
   <div class="card text-center mx-auto mb-5 alert alert-danger">
     <div class="card-body">
       <h5 class="card-title mb-4">
@@ -21,12 +21,24 @@
             <%= button_tag type: 'submit', class: "btn btn-success mt-4" do %>
               <i class="fas fa-pen"></i> 判定
             <% end %>
+            <%= button_tag type: 'submit', value: "cant", class: "btn btn-outline-danger mt-4" do %>
+              答えを見る
+            <% end %>
           </div>
         </div>
       <% end %>
     </div>
   </div>
-  <% else %>
+<% elsif @rightAnswer == "none" %>
+  <div class="card text-center mx-auto mb-5">
+    <div class="card-body">
+      <h5 class="card-title mb-4">
+        A. <%= word.answer %>
+      </h5>
+      <%= word.description %>
+    </div>
+  </div>
+<% else %>
   <div class="card text-center mx-auto mb-5">
     <div class="card-body">
       <h5 class="card-title mb-4">

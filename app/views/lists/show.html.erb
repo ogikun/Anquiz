@@ -15,9 +15,9 @@
         </div>
       </div>
       <div class="d-flex mx-auto">
-        <p class="mylistBtnZone<%= @list.id %>">
+        <p>
           <%= link_to list_question_path(list_id: @list.id), class: "btn btn-info" do %>
-            <i class="fas fa-pen"></i>
+            <i class="fas fa-pen"></i> 解く
           <% end %>
         </p>
         <p class="mylistBtnZone<%= @list.id %> ml-2">

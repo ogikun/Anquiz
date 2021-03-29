@@ -1,41 +1,10 @@
 <div class="container p-0 my-md-5">
   <div class="offset-md-2 col-md-8">
-    <% if !@favorites.empty? %>
+    <% if !@words.empty? %>
       <h3>いいねした単語</h3>
-      <% count = 0 %>
-      <% @favorites.each do |favorite| %>
-        <% count = count.succ %>
-        <div class="card text-center mx-auto mb-5">
-          <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs">
-              <li class="nav-item">
-                <a class="nav-link active" id="question<%= count %>-tab" data-toggle="tab" href="#question<%= count %>" role="tab" aria-controls="question<%= count %>" aria-selected="true">問<%= count  %></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="answer<%= count %>-tab" data-toggle="tab" href="#answer<%= count %>" role="tab" aria-controls="answer<%= count %>" aria-selected="false">解答</a>
-              </li>
-              <li class="favoriteBtnZone<%= favorite.word.id %> nav-item ml-auto">
-                <%= render "favorites/favorite_btn", word: favorite.word %>
-              </li>
-            </ul>
-          </div>
-          <div class="tab-content">
-            <div class="card-body tab-pane active" id="question<%= count %>" role="tabpanel" aria-labelledby="question<%= count %>-tab">
-              <h5 class="card-title">
-                <%= favorite.word.question %>
-              </h5>
-            </div>
-            <div class="card-body tab-pane" id="answer<%= count %>" role="tabpanel" aria-labelledby="answer<%= count %>-tab">
-              <h5 class="card-title">
-                <h5 class="border-bottom">A.　<%= favorite.word.answer %></h5><br>
-                <%= favorite.word.description %>
-              </h5>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <%= render "layouts/word_index", words: @words%>
       <div class="col-12 d-flex">
-        <div class="mx-auto"><%= paginate @favorites %></div>
+        <div class="mx-auto"><%= paginate @words %></div>
       </div>
     <% else %>
       <h3>いいねした単語がありません</h3>
