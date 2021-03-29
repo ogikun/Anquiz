@@ -5,6 +5,15 @@ class ListsController < ApplicationController
     @createComment = Comment.new
     @tags = @list.tags
     @words = @list.words
+    if user_signed_in?
+      if !((@list.public_status == 1)||(@list.user_id == current_user.id))
+        redirect_to root_path
+      end
+    else
+      if @list.public_status != 1
+        redirect_to root_path
+      end
+    end
   end
 
   def create
@@ -51,6 +60,15 @@ class ListsController < ApplicationController
   def question
     @list = List.find(params[:list_id])
     @words = @list.words.page(params[:page]).per(1)
+    if user_signed_in?
+      if !((@list.public_status == 1)||(@list.user_id == current_user.id))
+        redirect_to root_path
+      end
+    else
+      if @list.public_status != 1
+        redirect_to root_path
+      end
+    end
   end
 
   def solve
