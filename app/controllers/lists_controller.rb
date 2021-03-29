@@ -73,10 +73,14 @@ class ListsController < ApplicationController
 
   def solve
     @word = Word.find(params[:word])
-    if @word.answer == params[:answer]
-      @rightAnswer = "true"
+    if params[:button] == "cant"
+      @rightAnswer = "none"
     else
-      @rightAnswer = "false"
+      if @word.answer == params[:answer]
+        @rightAnswer = "true"
+      else
+        @rightAnswer = "false"
+      end
     end
   end
 

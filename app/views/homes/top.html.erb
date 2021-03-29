@@ -1,9 +1,9 @@
 <div class="container my-5">
-  <div class="mainVisual d-flex">
+  <div class="mainVisual d-flex mb-4">
     <div class="m-auto bg-secondary p-3 text-light">
       <h3>Anquiz</h3>
       <p>Anquizはクイズ形式で単語を覚えることができる単語帳アプリです。</p>
-      <% if !user_signed_in? %>
+      <% if !(user_signed_in? || admin_signed_in?) %>
         <div class="row">
           <div class="col-6 text-right">
             <p></p>
@@ -20,6 +20,9 @@
         </div>
       <% end %>
     </div>
-    
+  </div>
+  <div class="offset-md-2 col-md-8">
+    <h3>新着リスト</h3>
+    <%= render "layouts/list_index", lists: @lists%>
   </div>
 </div>

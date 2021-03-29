@@ -7,11 +7,11 @@ class Users::UsersController < ApplicationController
   end
 
   def bookmark
-    @favorites = current_user.favorites.reverse_order.page(params[:page]).per(10)
+    @words = Word.joins(:favorites).select("words.*, favorites.id AS favorite_id").where(favorites: {user_id: current_user.id}).order(favorite_id: "DESC").page(params[:page]).per(10)
   end
 
   def mylist
-    @mylists = current_user.mylists.reverse_order.page(params[:page]).per(10)
+    @lists = List.joins(:mylists).select("lists.*, mylists.id AS mylist_id").where(mylists: {user_id: current_user.id}).order(mylist_id: "DESC").page(params[:page]).per(10)
   end
 
   def edit

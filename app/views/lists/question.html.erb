@@ -18,9 +18,9 @@
       </div>
     </div>
 
-    <% @words.each do |word| %>
+    <% @words.each.with_index(1) do |word, i| %>
       <div class="questionZone">
-        <%= render "layouts/question", word: word %>
+        <%= render "layouts/question", word: word, i: i %>
       </div>
     <% end %>
   </div>
