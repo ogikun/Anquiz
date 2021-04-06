@@ -1,2 +1,0 @@
-class AddWordsController < ApplicationController
-end

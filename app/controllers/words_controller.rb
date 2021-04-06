@@ -6,8 +6,8 @@ class WordsController < ApplicationController
     createWord = Word.new(word_params)
     createWord.public_status = 0
     createWord.user_id = current_user.id
+    createWord.list_id = params[:list_id]
     createWord.save
-    AddWord.create(list_id: params[:list_id], word_id: createWord.id)
   end
 
   def destroy

@@ -12,15 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2021_03_27_081037) do
 
-  create_table "add_words", force: :cascade do |t|
-    t.integer "list_id", null: false
-    t.integer "word_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["list_id"], name: "index_add_words_on_list_id"
-    t.index ["word_id"], name: "index_add_words_on_word_id"
-  end
-
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -102,12 +93,14 @@ ActiveRecord::Schema.define(version: 2021_03_27_081037) do
 
   create_table "words", force: :cascade do |t|
     t.integer "user_id", null: false
+    t.integer "list_id", null: false
     t.string "question", null: false
     t.string "answer", null: false
     t.text "description", null: false
     t.integer "public_status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_words_on_list_id"
     t.index ["user_id"], name: "index_words_on_user_id"
   end
 

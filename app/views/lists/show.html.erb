@@ -2,7 +2,7 @@
   <div class="offset-md-2 col-md-8">
     <div class="card text-center my-5">
       <div class="card-header">
-        単語数：<%= @list.add_words.count %>
+        単語数：<%= @list.words.count %>
       </div>
       <div class="card-body">
         <h5 class="card-title"><%= @list.title %></h5>
@@ -23,6 +23,13 @@
         <p class="mylistBtnZone<%= @list.id %> ml-2">
           <%= render "mylists/mylist_btn", list: @list %>
         </p>
+        <% if @list.user == current_user %>
+          <p class="ml-2">
+            <%= link_to  edit_list_path(@list.id), class: "btn btn-outline-secondary" do %>
+              <i class="fas fa-cog"></i>
+            <% end %>
+          </p>
+        <% end %>
       </div>
       <div class="card-footer text-muted">
         Created by <%= @list.user.name %>
